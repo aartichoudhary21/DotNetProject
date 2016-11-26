@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace UserProfileApplication.Controllers
 {
@@ -19,6 +20,14 @@ namespace UserProfileApplication.Controllers
             return View();
         }
 
+        // GET: Users/Sign Out
+        public ActionResult SignOut()
+        {
+            Session["userEmail"] = Session["userId"]= null;
+            return RedirectToAction("Index");
+        }
+
+
         // POST: Users/SignIn
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -31,7 +40,10 @@ namespace UserProfileApplication.Controllers
                 var result = db.Users.SqlQuery(query).ToList<User>();
 
                 if (result.Count > 0)
+                {
+                    Session["userEmail"] = user.Email;
                     return RedirectToAction("Details", new { id = result[0].Id });
+                }
                 else
                     return null;
             }

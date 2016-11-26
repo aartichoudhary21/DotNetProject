@@ -14,11 +14,32 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>     
+        </dd>
+
+        @foreach (Card card in Model.Cards)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => card.CardNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => card.CardNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => card.NameOnCard)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => card.NameOnCard)
+            </dd>
+        }
+
+
 
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Add Card", "Create","Cards") |
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
