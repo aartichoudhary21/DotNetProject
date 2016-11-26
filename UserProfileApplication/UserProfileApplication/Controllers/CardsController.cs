@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace UserProfileApplication
+namespace UserProfileApplication.Controllers
 {
     public class CardsController : Controller
     {

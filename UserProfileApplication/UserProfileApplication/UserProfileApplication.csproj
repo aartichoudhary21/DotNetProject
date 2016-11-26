@@ -201,7 +201,7 @@
     <Compile Include="Card.cs">
       <DependentUpon>UserDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CardsController.cs" />
+    <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -231,7 +231,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="UsersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -313,7 +313,7 @@
     <Content Include="UserDataModel.edmx.diagram">
       <DependentUpon>UserDataModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Users\Create.cshtml" />
+    <None Include="Views\Users\SignUp.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />

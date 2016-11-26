@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace UserProfileApplication
+namespace UserProfileApplication.Controllers
 {
     public class UsersController : Controller
     {
@@ -16,7 +16,15 @@ namespace UserProfileApplication
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            try
+            {
+                return View(db.Users.ToList());
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         // GET: Users/Details/5
@@ -35,7 +43,7 @@ namespace UserProfileApplication
         }
 
         // GET: Users/Create
-        public ActionResult Create()
+        public ActionResult SignUp()
         {
             return View();
         }
@@ -45,7 +53,7 @@ namespace UserProfileApplication
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Password")] User user)
+        public ActionResult SignUp([Bind(Include = "Id,Email,Password")] User user)
         {
             if (ModelState.IsValid)
             {

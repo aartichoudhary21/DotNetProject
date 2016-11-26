@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<UserProfileApplication.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Signed Up Users";
 }
 
-<h2>Index</h2>
+<h2>Signed Up Users</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Password)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -25,9 +23,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Password)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
