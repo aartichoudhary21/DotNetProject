@@ -4,7 +4,10 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^G:\\Users\\SK_Verma\\Documents\\Aarti\\DotNetProject\\UserProfileApplication\\UserProfileApplication\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^G:\\Users\\SK_Verma\\Documents\\Aarti\\DotNetProject\\UserProfileApplication\\UserProfileApplication\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-UserProfileApplication-20161125091556.mdf;Initial Catalog=aspnet-UserProfileApplication-20161125091556;Integrated Security=True" tags="">
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="DefaultConnection_ConnectionString" tags="">
     <parameterEntry kind="XmlFile" scope="G:\\Users\\SK_Verma\\Documents\\Aarti\\DotNetProject\\UserProfileApplication\\UserProfileApplication\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="userprofiledatabaseEntities-Web.config Connection String" description="" value="metadata=res://*/UserDataModel.csdl|res://*/UserDataModel.ssdl|res://*/UserDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=userprofiledatabaseserver.database.windows.net;Initial Catalog=userprofiledatabase;Persist Security Info=True;User ID=aartichoudhary21;Password=Ac@compiler;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="G:\\Users\\SK_Verma\\Documents\\Aarti\\DotNetProject\\UserProfileApplication\\UserProfileApplication\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='userprofiledatabaseEntities']/@connectionString" />
   </parameter>
 </parameters>

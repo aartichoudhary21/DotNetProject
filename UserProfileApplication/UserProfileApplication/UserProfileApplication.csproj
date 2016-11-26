@@ -313,7 +313,7 @@
     <Content Include="UserDataModel.edmx.diagram">
       <DependentUpon>UserDataModel.edmx</DependentUpon>
     </Content>
-    <None Include="Views\Users\SignUp.cshtml" />
+    <Content Include="Views\Users\SignUp.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />

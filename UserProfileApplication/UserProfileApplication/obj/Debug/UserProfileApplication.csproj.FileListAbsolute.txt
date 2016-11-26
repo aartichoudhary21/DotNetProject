@@ -77,6 +77,5 @@ G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfi
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\bin\Microsoft.Owin.Security.Google.xml
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\bin\Microsoft.Owin.Security.Twitter.xml
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Debug\UserProfileApplication.csprojResolveAssemblyReference.cache
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Debug\UserProfileApplication.dll
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Debug\UserProfileApplication.pdb
