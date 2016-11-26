@@ -13,6 +13,35 @@ namespace UserProfileApplication.Controllers
     {
         private userprofiledatabaseEntities db = new userprofiledatabaseEntities();
 
+        // GET: Users/Sign In
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
+        // POST: Users/SignIn
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignIn([Bind(Include = "Id,Email,Password")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
+
+                var result = db.Users.SqlQuery(query).ToList<User>();
+
+                if (result.Count > 0)
+                    return RedirectToAction("Details", new { id = result[0].Id });
+                else
+                    return null;
+            }
+            else
+            {
+                return (null);
+            }
+        }
+
+
         // GET: Users
         public ActionResult Index()
         {
@@ -59,6 +88,7 @@ namespace UserProfileApplication.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
