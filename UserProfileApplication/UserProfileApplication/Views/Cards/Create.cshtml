@@ -5,26 +5,6 @@
 }
 
 <h2>Add Card</h2>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-
-    function validateCardDetails() {
-
-        try{
-            Stripe.setPublishableKey('pk_test_UnckYTxa51vrDohcJYgTmKum');
-
-            var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
-            if (!validateCardNumber)
-                alert('invalid card number');
-            else
-                alert('valid card number');
-        }
-        catch(e)
-        {
-            alert(e);
-        }
-    };
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -60,15 +40,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control" ,id = "card_number" } })
-                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
-            </div>
+                @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", id = "card_number" } })
+                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger"})
+                <label id = "error_card_number" class = "text-danger error_label" >Invalid Card Number</label>
+             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CVV, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CVV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CVV, new { htmlAttributes = new { @class = "form-control", id = "card_cvv" } })
                 @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -110,9 +91,46 @@
     </div>
 }
 
-<div>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
 
-</div>
+    function validateCardDetails() {
+
+        try {
+            Stripe.setPublishableKey('pk_test_UnckYTxa51vrDohcJYgTmKum');
+
+            var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
+            var validateCVV = Stripe.card.validateCVC(document.getElementById('card_cvv').value);
+            //var validateCVV = Stripe.card.validateCVC(document.getElementById('card_cvv').value);
+            //var validateCVV = Stripe.card.validateCVC(document.getElementById('card_cvv').value);
+            if (!validateCardNumber) {
+                $('#error_card_number').show();
+            }
+            else
+                $('#error_card_number').hide();
+            //if (!validateCVV)
+            //    alert('invalid cvv');
+            //else
+            //    alert('valid cvv');
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
+
+
+    $(document).ready(function () {
+        $('.error_label').hide();
+    });
+
+    $('.form-control').change(function () {
+         $('.error_label').hide();
+    });
+
+    function OnChangeEvent(){
+        $('.error_label').hide();
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
