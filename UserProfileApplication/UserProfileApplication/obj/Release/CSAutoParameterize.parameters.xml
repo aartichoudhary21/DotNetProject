@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="userprofiledatabaseEntities-Web.config Connection String" description="userprofiledatabaseEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/UserDataModel.csdl|res://*/UserDataModel.ssdl|res://*/UserDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=userprofiledatabaseserver.database.windows.net;initial catalog=userprofiledatabase;persist security info=True;user id=aartichoudhary21;password=Ac@compiler;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\suver\\Documents\\Visual\ Studio\ 2015\\Projects\\DotNetProject\\UserProfileApplication\\UserProfileApplication\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='userprofiledatabaseEntities']/@connectionString" />
-  </parameter>
-</parameters>
