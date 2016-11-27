@@ -17,7 +17,10 @@ namespace UserProfileApplication.Controllers
         // GET: Users/Sign In
         public ActionResult SignIn()
         {
-            return View();
+            if(Session["userId"] == null)
+                return View();
+            else
+                return RedirectToAction("Details", new { id= Session["userId"] });
         }
 
         // GET: Users/Sign Out

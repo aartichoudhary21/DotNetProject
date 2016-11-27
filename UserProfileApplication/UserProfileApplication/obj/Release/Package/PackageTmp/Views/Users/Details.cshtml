@@ -5,8 +5,9 @@
 }
 
 <div>
-    <h4>User Details</h4>
+    <h4>User Profile</h4>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Email)
@@ -17,29 +18,49 @@
         </dd>
 
         @foreach (Card card in Model.Cards)
-        {
-            <dt>
+            {
+            <dt style="margin-top:20px">
                 @Html.DisplayNameFor(model => card.CardNumber)
             </dt>
 
-            <dd>
+            <dd style="margin-top:20px">
                 @Html.DisplayFor(model => card.CardNumber)
             </dd>
-            <dt>
-                @Html.DisplayNameFor(model => card.NameOnCard)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => card.NameOnCard)
-            </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => card.CVV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => card.CVV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => card.ExpiryMonth)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => card.ExpiryMonth)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => card.ExpiryYear)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => card.ExpiryYear)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => card.NameOnCard)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => card.NameOnCard)
+                </dd>
         }
-
-
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Add Card", "Create","Cards") |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Add Card", "Create", "Cards")
 </p>

@@ -45,7 +45,7 @@ namespace UserProfileApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CardNumber,CVV,ExpiryMonth,ExpiryYear,NameOnCard")] Card card)
+        public ActionResult Create([Bind(Include = "CardId,CardNumber,CVV,ExpiryMonth,ExpiryYear,NameOnCard")] Card card)
         {
             if (ModelState.IsValid)
             {

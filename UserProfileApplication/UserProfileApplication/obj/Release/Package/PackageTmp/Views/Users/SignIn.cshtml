@@ -4,31 +4,6 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-    $('#btnSave').click(function (e) {
-        e.preventDefault(); // <------------------ stop default behaviour of button
-        var element = this;
-        $.ajax({
-            url: "/Users/SignIn",
-            type: "POST",
-            data: JSON.stringify({ 'Options': someData }),
-            dataType: "json",
-            traditional: true,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                if (data.status == "Success") {
-                    alert("Done");
-                    $(element).closest("form").submit(); //<------------ submit form
-
-                }
-                else { alert("Error occurs on the Database level!"); }
-            }, error: function () { alert("An error has occured!!!"); }
-        });
-    });
-</script>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -61,9 +36,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

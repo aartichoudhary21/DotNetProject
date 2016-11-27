@@ -6,7 +6,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + Session["userEmail"] + "!", "Details", "Users", routeValues: null, htmlAttributes: new { id = Session["userId"] })
+            @Html.ActionLink("Hello " + Session["userEmail"] + "!", "", "", routeValues: null, htmlAttributes: new { id = Session["userId"] })
          </li>
         <li>@Html.ActionLink("Sign Out", "SignOut", "Users")</li>
     </ul>
