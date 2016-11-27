@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Add Card";
+}
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function validateCardDetails() {
+
+        try {
+            Stripe.setPublishableKey('pk_test_UnckYTxa51vrDohcJYgTmKum');
+
+            var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
+            var validateCVV = Stripe.card.validateCVC(document.getElementById('card_cvv').value);
+            var validateExpiry = Stripe.card.validateExpiry((document.getElementById('card_expiry_month').value), (document.getElementById('card_expiry_year').value));
+            var validateName= document.getElementById('card_nameoncard').value != "";
+            if (!validateCardNumber)
+            {
+                $('#error_card_number').show();
+            }
+            else
+                $('#error_card_number').hide();
+
+            if (!validateCVV)
+                $('#error_card_cvv').show();
+            else
+                $('#error_card_cvv').hide();
+
+            if (!validateExpiry)
+                $('#error_card_expiry').show();
+            else
+                $('#error_card_expiry').hide();
+
+            if (!validateName)
+                $('#error_name_on_card').show();
+            else
+                $('#error_name_on_card').hide();
+            
+            if(validateCardNumber && validateCVV && validateExpiry && validateName)
+            {
+                GetStripeToken();
+            }
+
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
+
+
+    $(document).ready(function () {
+        $('.error_label').hide();
+    });
+
+    $('.form-control').click(function () {
+        $('.error_label').hide();
+    });
+
+</script>
+
+<script>
+    function GetStripeToken() {
+
+        // Get the Stripe token:
+        Stripe.card.createToken({
+            number: document.getElementById('card_number').value,
+            cvc: document.getElementById('card_cvv').value,
+            exp_month: document.getElementById('card_expiry_month').value,
+            exp_year: document.getElementById('card_expiry_year').value
+        }, stripeResponseHandler);
+    }
+
+    function stripeResponseHandler(status, response) {
+
+        if (status == 200)
+            SendTokenToServer(response);
+    }
+
+    function SendTokenToServer(token) {
+        
+        $.post("SaveCard", { TokenString: JSON.stringify(token)}, token, function (data) {
+            alert(data);
+        });
+    }
+
+</script>
+
+<h2>Add Card</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">Card Number</label>
+            <input type="text" class = "form-control" id = "card_number"/>                
+            <div class="col-md-10">
+               <label id="error_card_number" class="text-danger error_label">Invalid Card Number</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">CVV</label>
+            <input type="text" class="form-control" id="card_cvv" />
+            <div class="col-md-10">
+               <label id="error_card_cvv" class="text-danger error_label">Invalid CVV</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Card Expiry Month (eg. 11)</label>
+            <input type="text" class="form-control" id="card_expiry_month" />
+            
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Card Expiry Year (eg. 2020)</label>
+            <input type="text" class="form-control" id="card_expiry_year" />
+             <div class="col-md-10">
+                <label id="error_card_expiry" class="text-danger error_label">Invalid Expiry Month/Year</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Name on Card</label>
+            <input type="text" class="form-control" id="card_nameoncard" />
+            <div class="col-md-10">
+               <label id="error_name_on_card" class="text-danger error_label">Name On Card is Blank!</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <!----input type="submit" value="Add" class="btn btn-default" /-->
+                <input type="button" value="Add" onclick="validateCardDetails()" />
+                &nbsp;&nbsp; &nbsp;&nbsp;
+                @Html.ActionLink("Cancel", "Details", new { id = Session["userId"] }, null)
+
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
