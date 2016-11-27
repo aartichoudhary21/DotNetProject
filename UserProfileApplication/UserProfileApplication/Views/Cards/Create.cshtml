@@ -5,7 +5,50 @@
 }
 
 <h2>Add Card</h2>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
 
+    function validateCardDetails() {
+
+        try{
+            Stripe.setPublishableKey('pk_test_UnckYTxa51vrDohcJYgTmKum');
+
+            var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
+            if (!validateCardNumber)
+                alert('invalid card number');
+            else
+                alert('valid card number');
+        }
+        catch(e)
+        {
+            alert(e);
+        }
+    };
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $('#btnSave').click(function (e) {
+        e.preventDefault(); // <------------------ stop default behaviour of button
+        var element = this;
+        $.ajax({
+            url: "/Users/Create",
+            type: "POST",
+            data: JSON.stringify({ 'Options': someData }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.status == "Success") {
+                    alert("Done");
+                    $(element).closest("form").submit(); //<------------ submit form
+
+                }
+                else { alert("Error occurs on the Database level!"); }
+            }, error: function () { alert("An error has occured!!!"); }
+        });
+    });
+</script>
 
 @using (Html.BeginForm())
 {
@@ -17,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control" ,id = "card_number" } })
                 @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +100,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
 
-                <input type="submit" value="Add" class="btn btn-default" />
+                <!----input type="submit" value="Add" class="btn btn-default" /-->
+                <input type="button" value="Add" onclick="validateCardDetails()" />
                 &nbsp;&nbsp; &nbsp;&nbsp;
                 @Html.ActionLink("Cancel", "Details", "Users", new { id = Session["userId"] }, null)
 

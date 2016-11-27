@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stripe;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -49,14 +50,13 @@ namespace UserProfileApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                int variable = Convert.ToInt32(Session["userId"]);
-                User user= (new UsersController()).GetUser(variable);
-                card.UserId = user.UserId;
-                db.Cards.Add(card);
-                db.SaveChanges();
-                return RedirectToAction("Details","Users", new { id = user.UserId });
+                    int variable = Convert.ToInt32(Session["userId"]);
+                    User user = (new UsersController()).GetUser(variable);
+                    card.UserId = user.UserId;
+                    db.Cards.Add(card);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Users", new { id = user.UserId });                
             }
-
             return View(card);
         }
 
@@ -124,6 +124,6 @@ namespace UserProfileApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }        
     }
 }
