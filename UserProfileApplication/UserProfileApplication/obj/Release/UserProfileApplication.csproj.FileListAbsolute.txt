@@ -164,3 +164,5 @@ G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfi
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\UserProfileApplication.csprojResolveAssemblyReference.cache
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\UserProfileApplication.dll
 G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\UserProfileApplication.pdb
+C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\bin\Stripe.net.dll
+C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\bin\Stripe.net.xml
