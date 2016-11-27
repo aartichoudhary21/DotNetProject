@@ -16,9 +16,8 @@
             var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
             var validateCVV = Stripe.card.validateCVC(document.getElementById('card_cvv').value);
             var validateExpiry = Stripe.card.validateExpiry((document.getElementById('card_expiry_month').value), (document.getElementById('card_expiry_year').value));
-            var validateName= document.getElementById('card_nameoncard').value != "";
-            if (!validateCardNumber)
-            {
+            var validateName = document.getElementById('card_nameoncard').value != "";
+            if (!validateCardNumber) {
                 $('#error_card_number').show();
             }
             else
@@ -38,9 +37,8 @@
                 $('#error_name_on_card').show();
             else
                 $('#error_name_on_card').hide();
-            
-            if(validateCardNumber && validateCVV && validateExpiry && validateName)
-            {
+
+            if (validateCardNumber && validateCVV && validateExpiry && validateName) {
                 GetStripeToken();
             }
         }
@@ -79,7 +77,7 @@
     }
 
     function SendTokenToServer(token) {
-        
+
         $.post("SaveCard", { TokenString: token.id }, function (data) {
             if (data == "True")
                 alert("Card Details Successfully Saved");
@@ -99,53 +97,89 @@
     <div class="form-horizontal">
         <hr />
         <div class="form-group">
-            <label class="control-label col-md-2">Card Number</label>
-            <input type="text" class = "form-control" id = "card_number"/>                
-            <div class="col-md-10">
-               <label id="error_card_number" class="text-danger error_label">Invalid Card Number</label>
-            </div>
+            <table>
+                <tr style="margin-bottom:10px">
+                    <td width=48%>
+                        <label class="control-label col-md-2">Card Number</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="card_number" />
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            <label id="error_card_number" class="text-danger error_label">Invalid Card Number</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="margin:10px">
+                    <td width="48%">
+                        <label class="control-label col-md-2">CVV</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="card_cvv" />
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            <label id="error_card_cvv" class="text-danger error_label">Invalid CVV</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="padding:10px">
+                    <td width=48%>
+                        <label class="control-label col-md-2">Card Expiry Month (eg. 11)</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="card_expiry_month" />
+                    </td>
+                </tr>
+
+                <tr style="padding:10px">
+                    <td width="48%">
+                        <label class="control-label col-md-2">Card Expiry Year (eg. 2020)</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="card_expiry_year" />
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            <label id="error_card_expiry" class="text-danger error_label">Invalid Expiry Month/Year</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="padding:10px">
+                    <td width="48%">
+                        <label class="control-label col-md-2">Name on Card</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="card_nameoncard" />
+                    </td>
+                    <td>
+                        <div class="col-md-10">
+                            <label id="error_name_on_card" class="text-danger error_label">Name On Card is Blank!</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="padding:10px">
+                    <td></td>
+                    <td>
+                        <div class="col-md-offset-2 col-md-10">
+
+                            <!----input type="submit" value="Add" class="btn btn-default" /-->
+                            <input type="button" value="Add" onclick="validateCardDetails()" />
+                            &nbsp;&nbsp; &nbsp;&nbsp;
+                            @Html.ActionLink("Cancel", "Details", new { id = Session["userId"] }, null)
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">CVV</label>
-            <input type="text" class="form-control" id="card_cvv" />
-            <div class="col-md-10">
-               <label id="error_card_cvv" class="text-danger error_label">Invalid CVV</label>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Card Expiry Month (eg. 11)</label>
-            <input type="text" class="form-control" id="card_expiry_month" />
-            
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Card Expiry Year (eg. 2020)</label>
-            <input type="text" class="form-control" id="card_expiry_year" />
-             <div class="col-md-10">
-                <label id="error_card_expiry" class="text-danger error_label">Invalid Expiry Month/Year</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Name on Card</label>
-            <input type="text" class="form-control" id="card_nameoncard" />
-            <div class="col-md-10">
-               <label id="error_name_on_card" class="text-danger error_label">Name On Card is Blank!</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-
-                <!----input type="submit" value="Add" class="btn btn-default" /-->
-                <input type="button" value="Add" onclick="validateCardDetails()" />
-                &nbsp;&nbsp; &nbsp;&nbsp;
-                @Html.ActionLink("Cancel", "Details", new { id = Session["userId"] }, null)
-
-            </div>
-        </div>
     </div>
 }
 
