@@ -40,7 +40,7 @@ namespace UserProfileApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (user.Email != null || user.Password != null)
+                if (user.Email != null && user.Password != null)
                 {
                     string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
 
@@ -105,21 +105,27 @@ namespace UserProfileApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignUp([Bind(Include = "Id,Email,Password")] User user)
         {
-            if (ModelState.IsValid)
+            if (user.Email != null && user.Password != null)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
 
-                string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
-
-                var result = db.Users.SqlQuery(query).ToList<User>();
-
-                if (result.Count > 0)
+                if (ModelState.IsValid)
                 {
-                    Session["userEmail"] = user.Email;
-                    Session["userId"] = result[0].UserId;
-                    return RedirectToAction("Details", new { id = result[0].UserId });
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
+
+                    var result = db.Users.SqlQuery(query).ToList<User>();
+
+                    if (result.Count > 0)
+                    {
+                        Session["userEmail"] = user.Email;
+                        Session["userId"] = result[0].UserId;
+                        return RedirectToAction("Details", new { id = result[0].UserId });
+                    }
                 }
+            
+                return RedirectToAction("SignUp");
             }
 
             return View(user);
