@@ -110,7 +110,16 @@ namespace UserProfileApplication.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
+
+                var result = db.Users.SqlQuery(query).ToList<User>();
+
+                if (result.Count > 0)
+                {
+                    Session["userEmail"] = user.Email;
+                    Session["userId"] = result[0].UserId;
+                    return RedirectToAction("Details", new { id = result[0].UserId });
+                }
             }
 
             return View(user);
