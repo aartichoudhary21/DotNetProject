@@ -10,6 +10,7 @@
     function validateCardDetails() {
 
         try {
+
             Stripe.setPublishableKey('pk_test_UnckYTxa51vrDohcJYgTmKum');
 
             var validateCardNumber = Stripe.card.validateCardNumber(document.getElementById('card_number').value);
@@ -42,7 +43,6 @@
             {
                 GetStripeToken();
             }
-
         }
         catch (e) {
             alert(e);
@@ -80,8 +80,12 @@
 
     function SendTokenToServer(token) {
         
-        $.post("SaveCard", { TokenString: JSON.stringify(token)}, token, function (data) {
-            alert(data);
+        $.post("SaveCard", { TokenString: token.id }, function (data) {
+            if (data == "True")
+                alert("Card Details Successfully Saved");
+            else
+                alert('Some Error Ocurred!!');
+
         });
     }
 
