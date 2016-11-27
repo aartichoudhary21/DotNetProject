@@ -110,7 +110,16 @@ namespace UserProfileApplication.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
+
+                var result = db.Users.SqlQuery(query).ToList<User>();
+
+                if (result.Count > 0)
+                {
+                    Session["userEmail"] = user.Email;
+                    Session["userId"] = result[0].UserId;
+                    return RedirectToAction("Details", new { id = result[0].UserId });
+                }
             }
 
             return View(user);
@@ -130,9 +139,12 @@ namespace UserProfileApplication.Controllers
             
             var customerService = new StripeCustomerService();
             StripeCustomer stripeCustomer = customerService.Create(myCustomer);
-
-            string query = "update users set customerid ='"+ stripeCustomer.Id +"' where email= '"+Session["userEmail"].ToString() +"'";
-            var result = db.Users.SqlQuery(query);            
+                       
+            User user = new User();
+            user = db.Users.Find(Session["userId"]);
+            user.CustomerId = stripeCustomer.Id;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
 
             return true;
         }
