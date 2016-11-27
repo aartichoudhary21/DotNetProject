@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Stripe;
+using System.Web.Script.Serialization;
 
 namespace UserProfileApplication.Controllers
 {
@@ -109,9 +111,22 @@ namespace UserProfileApplication.Controllers
         }
 
         [HttpPost]
-        public bool SaveCard(string TokenString)
+        public bool SaveCard(string TokenId)
         {
-            Console.WriteLine(TokenString);
+            Console.WriteLine(TokenId);
+            StripeConfiguration.SetApiKey("sk_test_sM18FjGmOrWQ550zlR6wlpxs");
+
+            var myCustomer = new StripeCustomerCreateOptions();
+            myCustomer.Email = Session["userEmail"].ToString();
+            myCustomer.Description = "New User";
+
+            myCustomer.SourceToken = TokenId;
+            
+            var customerService = new StripeCustomerService();
+            StripeCustomer stripeCustomer = customerService.Create(myCustomer);
+
+            string query = "update users set customerid ='"+ stripeCustomer.Id +"' where email= '"+Session["userEmail"].ToString() +"'";
+            var result = db.Users.SqlQuery(query);            
 
             return true;
         }
