@@ -14,12 +14,13 @@ namespace UserProfileApplication
     
     public partial class Card
     {
-        public int Id { get; set; }
+        public int CardId { get; set; }
         public string CardNumber { get; set; }
         public short CVV { get; set; }
         public short ExpiryMonth { get; set; }
         public short ExpiryYear { get; set; }
         public string NameOnCard { get; set; }
+        public int UserId { get; set; }
     
         public virtual User User { get; set; }
     }

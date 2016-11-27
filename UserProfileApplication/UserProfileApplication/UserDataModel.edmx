@@ -15,33 +15,33 @@
   </EntityContainer>
   <EntityType Name="Users">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Cards">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="CardId" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CardNumber" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CVV" Type="smallint" Nullable="false" />
     <Property Name="ExpiryMonth" Type="smallint" Nullable="false" />
     <Property Name="ExpiryYear" Type="smallint" Nullable="false" />
     <Property Name="NameOnCard" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserCard">
     <End Role="User" Type="userprofiledatabaseModel.Store.Users" Multiplicity="1" />
     <End Role="Card" Type="userprofiledatabaseModel.Store.Cards" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="Card">
-        <PropertyRef Name="User_Id" />
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -59,28 +59,37 @@
         </EntityContainer>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
           <NavigationProperty Name="Cards" Relationship="userprofiledatabaseModel.UserCard" FromRole="User" ToRole="Card" />
         </EntityType>
         <EntityType Name="Card">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="CardId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CardNumber" Type="String" Nullable="false" />
           <Property Name="CVV" Type="Int16" Nullable="false" />
           <Property Name="ExpiryMonth" Type="Int16" Nullable="false" />
           <Property Name="ExpiryYear" Type="Int16" Nullable="false" />
           <Property Name="NameOnCard" Type="String" Nullable="false" />
           <NavigationProperty Name="User" Relationship="userprofiledatabaseModel.UserCard" FromRole="Card" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="UserCard">
           <End Type="userprofiledatabaseModel.User" Role="User" Multiplicity="1" />
           <End Type="userprofiledatabaseModel.Card" Role="Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -91,7 +100,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(userprofiledatabaseModel.User)">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
@@ -100,23 +109,16 @@
     <EntitySetMapping Name="Cards">
       <EntityTypeMapping TypeName="IsTypeOf(userprofiledatabaseModel.Card)">
         <MappingFragment StoreEntitySet="Cards">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
           <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
           <ScalarProperty Name="CVV" ColumnName="CVV" />
           <ScalarProperty Name="ExpiryMonth" ColumnName="ExpiryMonth" />
           <ScalarProperty Name="ExpiryYear" ColumnName="ExpiryYear" />
           <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="UserCard" TypeName="userprofiledatabaseModel.UserCard" StoreEntitySet="Cards">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="User_Id" />
-      </EndProperty>
-      <EndProperty Name="Card">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\UserDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\UserDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

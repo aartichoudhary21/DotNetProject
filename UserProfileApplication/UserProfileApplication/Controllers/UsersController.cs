@@ -24,7 +24,7 @@ namespace UserProfileApplication.Controllers
         public ActionResult SignOut()
         {
             Session["userEmail"] = Session["userId"]= null;
-            return RedirectToAction("Index");
+            return RedirectToAction("SignIn");
         }
 
 
@@ -42,7 +42,8 @@ namespace UserProfileApplication.Controllers
                 if (result.Count > 0)
                 {
                     Session["userEmail"] = user.Email;
-                    return RedirectToAction("Details", new { id = result[0].Id });
+                    Session["userId"] = result[0].UserId;
+                    return RedirectToAction("Details", new { id = result[0].UserId });
                 }
                 else
                     return null;
@@ -57,15 +58,7 @@ namespace UserProfileApplication.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.Users.ToList());
-            }
-            catch
-            {
-                return null;
-            }
-
+           return RedirectToAction("SignIn");
         }
 
         // GET: Users/Details/5
@@ -171,6 +164,11 @@ namespace UserProfileApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public User GetUser(int id)
+        {
+            User user = db.Users.Find(id);
+            return user;
         }
     }
 }

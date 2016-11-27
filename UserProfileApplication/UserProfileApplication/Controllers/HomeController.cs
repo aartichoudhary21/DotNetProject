@@ -10,7 +10,7 @@ namespace UserProfileApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("SignIn", "Users", null);
         }
 
         public ActionResult About()

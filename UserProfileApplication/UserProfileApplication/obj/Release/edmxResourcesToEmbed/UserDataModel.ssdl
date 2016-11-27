@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="userprofiledatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="userprofiledatabaseModelStoreContainer">
+    <EntitySet Name="Users" EntityType="userprofiledatabaseModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cards" EntityType="userprofiledatabaseModel.Store.Cards" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserCard" Association="userprofiledatabaseModel.Store.UserCard">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Card" EntitySet="Cards" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cards">
+    <Key>
+      <PropertyRef Name="CardId" />
+    </Key>
+    <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CVV" Type="smallint" Nullable="false" />
+    <Property Name="ExpiryMonth" Type="smallint" Nullable="false" />
+    <Property Name="ExpiryYear" Type="smallint" Nullable="false" />
+    <Property Name="NameOnCard" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserCard">
+    <End Role="User" Type="userprofiledatabaseModel.Store.Users" Multiplicity="1" />
+    <End Role="Card" Type="userprofiledatabaseModel.Store.Cards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Card">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

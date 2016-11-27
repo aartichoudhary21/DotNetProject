@@ -49,9 +49,12 @@ namespace UserProfileApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                int variable = Convert.ToInt32(Session["userId"]);
+                User user= (new UsersController()).GetUser(variable);
+                card.UserId = user.UserId;
                 db.Cards.Add(card);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Users", new { id = user.UserId });
             }
 
             return View(card);
