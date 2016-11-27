@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\suver\Documents\Visual Studio 2015\Projects\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" />
+  <setAcl path="G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="G:\Users\SK_Verma\Documents\Aarti\DotNetProject\UserProfileApplication\UserProfileApplication\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

@@ -7,11 +7,6 @@
     <Schema Namespace="userprofiledatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="userprofiledatabaseModelStoreContainer">
     <EntitySet Name="Users" EntityType="userprofiledatabaseModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Cards" EntityType="userprofiledatabaseModel.Store.Cards" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="UserCard" Association="userprofiledatabaseModel.Store.UserCard">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Card" EntitySet="Cards" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users">
     <Key>
@@ -20,42 +15,14 @@
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerId" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
-  <EntityType Name="Cards">
-    <Key>
-      <PropertyRef Name="CardId" />
-    </Key>
-    <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CardNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CVV" Type="smallint" Nullable="false" />
-    <Property Name="ExpiryMonth" Type="smallint" Nullable="false" />
-    <Property Name="ExpiryYear" Type="smallint" Nullable="false" />
-    <Property Name="NameOnCard" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="UserCard">
-    <End Role="User" Type="userprofiledatabaseModel.Store.Users" Multiplicity="1" />
-    <End Role="Card" Type="userprofiledatabaseModel.Store.Cards" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Card">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="userprofiledatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="userprofiledatabaseEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Users" EntityType="userprofiledatabaseModel.User" />
-          <EntitySet Name="Cards" EntityType="userprofiledatabaseModel.Card" />
-          <AssociationSet Name="UserCard" Association="userprofiledatabaseModel.UserCard">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Card" EntitySet="Cards" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -64,33 +31,8 @@
           <Property Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
-          <NavigationProperty Name="Cards" Relationship="userprofiledatabaseModel.UserCard" FromRole="User" ToRole="Card" />
+          <Property Name="CustomerId" Type="String" Nullable="true" />
         </EntityType>
-        <EntityType Name="Card">
-          <Key>
-            <PropertyRef Name="CardId" />
-          </Key>
-          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardNumber" Type="String" Nullable="false" />
-          <Property Name="CVV" Type="Int16" Nullable="false" />
-          <Property Name="ExpiryMonth" Type="Int16" Nullable="false" />
-          <Property Name="ExpiryYear" Type="Int16" Nullable="false" />
-          <Property Name="NameOnCard" Type="String" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="userprofiledatabaseModel.UserCard" FromRole="Card" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="UserCard">
-          <End Type="userprofiledatabaseModel.User" Role="User" Multiplicity="1" />
-          <End Type="userprofiledatabaseModel.Card" Role="Card" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Card">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -103,19 +45,7 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Cards">
-      <EntityTypeMapping TypeName="IsTypeOf(userprofiledatabaseModel.Card)">
-        <MappingFragment StoreEntitySet="Cards">
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-          <ScalarProperty Name="CVV" ColumnName="CVV" />
-          <ScalarProperty Name="ExpiryMonth" ColumnName="ExpiryMonth" />
-          <ScalarProperty Name="ExpiryYear" ColumnName="ExpiryYear" />
-          <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

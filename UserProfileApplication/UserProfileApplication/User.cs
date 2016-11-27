@@ -14,17 +14,9 @@ namespace UserProfileApplication
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Cards = new HashSet<Card>();
-        }
-    
         public int UserId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Card> Cards { get; set; }
+        public string CustomerId { get; set; }
     }
 }

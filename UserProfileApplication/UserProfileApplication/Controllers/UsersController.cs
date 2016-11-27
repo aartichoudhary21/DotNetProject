@@ -85,6 +85,11 @@ namespace UserProfileApplication.Controllers
             return View();
         }
 
+        public ActionResult CreateCard()
+        {
+            return View();
+        }
+
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -101,6 +106,15 @@ namespace UserProfileApplication.Controllers
             }
 
             return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveCard(string tokenString)
+        {
+            Console.WriteLine(tokenString);
+
+            return null;
         }
 
         // GET: Users/Edit/5
