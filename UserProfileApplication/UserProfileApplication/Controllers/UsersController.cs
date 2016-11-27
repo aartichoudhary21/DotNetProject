@@ -109,12 +109,11 @@ namespace UserProfileApplication.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveCard(string tokenString)
+        public bool SaveCard(string TokenString)
         {
-            Console.WriteLine(tokenString);
+            Console.WriteLine(TokenString);
 
-            return null;
+            return true;
         }
 
         // GET: Users/Edit/5
