@@ -6,8 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a0a5274a921247a4bc1432d3eecdfa81" Name="Diagram1" >
         <EntityTypeShape EntityType="userprofiledatabaseModel.User" Width="1.5" PointX="2.875" PointY="1.125" />
-        <EntityTypeShape EntityType="userprofiledatabaseModel.Card" Width="1.5" PointX="7" PointY="0.875" />
-        <AssociationConnector Association="userprofiledatabaseModel.UserCard" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -34,26 +34,32 @@ namespace UserProfileApplication.Controllers
         // POST: Users/SignIn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn([Bind(Include = "Id,Email,Password")] User user)
+        public ActionResult SignIn([Bind(Include = "UserId,Email,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
-
-                var result = db.Users.SqlQuery(query).ToList<User>();
-
-                if (result.Count > 0)
+                if (user.Email != null || user.Password != null)
                 {
-                    Session["userEmail"] = user.Email;
-                    Session["userId"] = result[0].UserId;
-                    return RedirectToAction("Details", new { id = result[0].UserId });
+                    string query = "select * from users where email='" + user.Email + "' and password='" + user.Password + "'";
+
+                    var result = db.Users.SqlQuery(query).ToList<User>();
+
+                    if (result.Count > 0)
+                    {
+                        Session["userEmail"] = user.Email;
+                        Session["userId"] = result[0].UserId;
+                        return RedirectToAction("Details", new { id = result[0].UserId });
+                    }
+                    else
+                        return RedirectToAction("SignIn");
                 }
-                else
-                    return null;
+               
+                return RedirectToAction("SignIn");
+
             }
             else
             {
-                return (null);
+                return RedirectToAction("SignIn");
             }
         }
 

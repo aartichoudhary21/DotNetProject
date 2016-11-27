@@ -7,19 +7,7 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Cards">
-      <EntityTypeMapping TypeName="IsTypeOf(userprofiledatabaseModel.Card)">
-        <MappingFragment StoreEntitySet="Cards">
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-          <ScalarProperty Name="CVV" ColumnName="CVV" />
-          <ScalarProperty Name="ExpiryMonth" ColumnName="ExpiryMonth" />
-          <ScalarProperty Name="ExpiryYear" ColumnName="ExpiryYear" />
-          <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

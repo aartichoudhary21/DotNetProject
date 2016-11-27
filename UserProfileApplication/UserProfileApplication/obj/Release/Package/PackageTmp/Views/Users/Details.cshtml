@@ -15,52 +15,9 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        @foreach (Card card in Model.Cards)
-            {
-            <dt style="margin-top:20px">
-                @Html.DisplayNameFor(model => card.CardNumber)
-            </dt>
-
-            <dd style="margin-top:20px">
-                @Html.DisplayFor(model => card.CardNumber)
-            </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => card.CVV)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => card.CVV)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => card.ExpiryMonth)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => card.ExpiryMonth)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => card.ExpiryYear)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => card.ExpiryYear)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => card.NameOnCard)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => card.NameOnCard)
-                </dd>
-        }
+        </dd>                
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Add Card", "Create", "Cards")
+    @Html.ActionLink("Add Card", "CreateCard")
 </p>
