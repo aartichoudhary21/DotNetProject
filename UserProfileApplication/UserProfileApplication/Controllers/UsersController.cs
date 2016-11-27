@@ -130,9 +130,12 @@ namespace UserProfileApplication.Controllers
             
             var customerService = new StripeCustomerService();
             StripeCustomer stripeCustomer = customerService.Create(myCustomer);
-
-            string query = "update users set customerid ='"+ stripeCustomer.Id +"' where email= '"+Session["userEmail"].ToString() +"'";
-            var result = db.Users.SqlQuery(query);            
+                       
+            User user = new User();
+            user = db.Users.Find(Session["userId"]);
+            user.CustomerId = stripeCustomer.Id;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
 
             return true;
         }
