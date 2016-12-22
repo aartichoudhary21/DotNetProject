@@ -12,6 +12,7 @@ using UserProfileApplication.Models;
 
 namespace UserProfileApplication.Controllers
 {
+	
     [Authorize]
     public class AccountController : Controller
     {
